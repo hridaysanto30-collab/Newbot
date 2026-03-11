@@ -21,18 +21,17 @@ const last = {};
 // =======================
 const TRIGGERS = [
   {
-    words: ["bye","Bye","BYE","বাই","by","By"],
+    words: ["bay","Bay","বায়","বাই"],
     text: "👉যাবি তো যা এতো বাই বাই করার কি আছে যা রাস্তা মাপ!🤫🥱",
     images: [
       "https://i.imgur.com/gi53DUs.jpeg"
     ]
   },
   {
-    words: ["ʚ๛🅑︎ⓄᏇ▸᭄ـہہــہہــ⧸⧸ㇳ😎😈😗"],
-    text: "আমাকে না ডেকে  আমার বস 𝐑𝐉 𝐅𝐀𝐑𝐇𝐀𝐍 কে একটা জি এফ দাও-😽🫶 [https://www.facebook.com/DEVIL.FARHAN.420,!🌺",
+    words: ["গুড মর্নিং""good morning","Good morning"],
+    text: "-@everyone- এই লুচ্ছা সকালে দাত ব্রাশ না করে গ্রুপে আইছে ওরে কেউ একটা উশখা মারো-😎🥴",
     images: [
-      "https://i.imgur.com/KTbC7yj.jpeg",
-      "https://i.imgur.com/LgXEU7R.jpeg"
+      "https://i.imgur.com/Qi1yjyx.jpeg",
     ]
   }
 ];

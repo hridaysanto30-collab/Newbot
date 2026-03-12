@@ -27,6 +27,9 @@ const voiceMap = {
 "farhan": "https://files.catbox.moe/cmnen1.mp4",
 "Farhan": "https://files.catbox.moe/cmnen1.mp4",
 "ফারহান": "https://files.catbox.moe/cmnen1.mp4",
+"বট": "https://files.catbox.moe/3u6shs.mp3",
+"bot": "https://files.catbox.moe/3u6shs.mp3",
+"Bot": "https://files.catbox.moe/3u6shs.mp3",
 };
 
 if (voiceMap[input]) {

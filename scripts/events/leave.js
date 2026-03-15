@@ -1,98 +1,78 @@
-const { getTime, drive } = global.utils;
+const { getTime } = global.utils;
+const axios = require("axios");
 
 module.exports = {
 	config: {
 		name: "leave",
-		version: "1.4",
-		author: "NTKhang",
+		version: "2.5",
+		author: "NTKhang | Roasted by Grok",
 		category: "events"
 	},
 
-	langs: {
-		vi: {
-			session1: "sáng",
-			session2: "trưa",
-			session3: "chiều",
-			session4: "tối",
-			leaveType1: "tự rời",
-			leaveType2: "bị kick",
-			defaultLeaveMessage: "{userName} đã {type} khỏi nhóm"
-		},
-		en: {
-			session1: "morning",
-			session2: "noon",
-			session3: "afternoon",
-			session4: "evening",
-			leaveType1: "left",
-			leaveType2: "was kicked from",
-			defaultLeaveMessage: "{userName} {type} the group"
+	onStart: async function ({ threadsData, message, event, api, usersData }) {
+		if (event.logMessageType !== "log:unsubscribe") return;
+
+		const { threadID } = event;
+		const threadData = await threadsData.get(threadID);
+		if (!threadData.settings?.sendLeaveMessage) return;
+
+		const { leftParticipantFbId } = event.logMessageData;
+		if (leftParticipantFbId == api.getCurrentUserID()) return;
+
+		const userName = await usersData.getName(leftParticipantFbId);
+		const isKick = leftParticipantFbId !== event.author; // true = কিক খাইছে, false = নিজে লিভ করছে
+
+		/
+		const selfLeaveTexts = [
+			`${userName} Left gok gok`
+		];
+
+		// 
+		const kickTexts = [
+			`${userName} আবলামি করার জন্য পার্মানেন্ট কিক খাইলো`
+		];
+
+		const finalText = isKick 
+			? kickTexts[Math.floor(Math.random() * kickTexts.length)]
+			: selfLeaveTexts[Math.floor(Math.random() * selfLeaveTexts.length)];
+
+		const form = {
+			body: finalText,
+			mentions: [{
+				tag: userName,
+				id: leftParticipantFbId
+			}]
+		};
+
+		// তোমার GIF (যেই হোক — লিভ হোক বা কিক, একই GIF যাবে)
+		const GIF_LINK = "https://i.ibb.co/60BfHhnq/539351705-1109553464575625-6622039206517931039-n-gif-nc-cat-102-ccb-1-7-nc-sid-cf94fc-nc-eui2-Ae-H.gif";
+
+		let attachments = [];
+
+		// অ্যাডমিন যদি কাস্টম GIF সেট করে তাহলে সেটাই যাবে
+		if (threadData.data.leaveAttachment && threadData.data.leaveAttachment.length > 0) {
+			for (const fileId of threadData.data.leaveAttachment) {
+				try {
+					attachments.push(await global.utils.drive.getFile(fileId, "stream"));
+				} catch (e) {}
+			}
+		} 
+		// না থাকলে তোমার এই GIF টাই যাবে যাবে
+		else {
+			try {
+				const response = await axios({
+					url: GIF_LINK,
+					method: "GET",
+					responseType: "stream"
+				});
+				attachments.push(response.data);
+			} catch (err) {
+				console.log("GIF লোড হয়নি:", err.message);
+			}
 		}
-	},
 
-	onStart: async ({ threadsData, message, event, api, usersData, getLang }) => {
-		if (event.logMessageType == "log:unsubscribe")
-			return async function () {
-				const { threadID } = event;
-				const threadData = await threadsData.get(threadID);
-				if (!threadData.settings.sendLeaveMessage)
-					return;
-				const { leftParticipantFbId } = event.logMessageData;
-				if (leftParticipantFbId == api.getCurrentUserID())
-					return;
-				const hours = getTime("HH");
+		if (attachments.length > 0) form.attachment = attachments;
 
-				const threadName = threadData.threadName;
-				const userName = await usersData.getName(leftParticipantFbId);
-
-				// {userName}   : name of the user who left the group
-				// {type}       : type of the message (leave)
-				// {boxName}    : name of the box
-				// {threadName} : name of the box
-				// {time}       : time
-				// {session}    : session
-
-				let { leaveMessage = getLang("defaultLeaveMessage") } = threadData.data;
-				const form = {
-					mentions: leaveMessage.match(/\{userNameTag\}/g) ? [{
-						tag: userName,
-						id: leftParticipantFbId
-					}] : null
-				};
-
-				leaveMessage = leaveMessage
-					.replace(/\{userName\}|\{userNameTag\}/g, userName)
-					.replace(/\{type\}/g, leftParticipantFbId == event.author ? getLang("leaveType1") : getLang("leaveType2"))
-					.replace(/\{threadName\}|\{boxName\}/g, threadName)
-					.replace(/\{time\}/g, hours)
-					.replace(/\{session\}/g, hours <= 10 ?
-						getLang("session1") :
-						hours <= 12 ?
-							getLang("session2") :
-							hours <= 18 ?
-								getLang("session3") :
-								getLang("session4")
-					);
-
-				form.body = leaveMessage;
-
-				if (leaveMessage.includes("{userNameTag}")) {
-					form.mentions = [{
-						id: leftParticipantFbId,
-						tag: userName
-					}];
-				}
-
-				if (threadData.data.leaveAttachment) {
-					const files = threadData.data.leaveAttachment;
-					const attachments = files.reduce((acc, file) => {
-						acc.push(drive.getFile(file, "stream"));
-						return acc;
-					}, []);
-					form.attachment = (await Promise.allSettled(attachments))
-						.filter(({ status }) => status == "fulfilled")
-						.map(({ value }) => value);
-				}
-				message.send(form);
-			};
+		message.send(form);
 	}
 };

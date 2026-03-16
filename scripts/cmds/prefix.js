@@ -4,8 +4,8 @@ const moment = require("moment-timezone");
 const getStreamFromURL = global.utils.getStreamFromURL;
 
 const gifList = [
-	"https://i.postimg.cc/mrzwcJsh/GIF-20250712-114810-632.gif",
-   "https://i.postimg.cc/mrzwcJsh/GIF-20250712-114810-632.gif"
+"https://i.postimg.cc/mrzwcJsh/GIF-20250712-114810-632.gif",
+"https://i.postimg.cc/mrzwcJsh/GIF-20250712-114810-632.gif",
 ];
 
 const getRandomGif = () =>
@@ -24,13 +24,13 @@ module.exports = {
 
 	langs: {
 		en: {
-			usage: "❌ Usage: prefix <newPrefix> | prefix reset | prefix <newPrefix> -g",
-			reset: "✅ Prefix reset successful!\n🔰 System prefix: %1",
-			onlyAdmin: "⛔ Only bot admin can change global prefix.",
-			confirmGlobal: "⚙️ Global prefix change requested.\n👉 React with emoji to confirm.",
-			confirmThisThread: "🛠️ Group prefix change requested.\n👉 React with emoji to confirm.",
-			successGlobal: "✅ Global prefix changed!\n🆕 New prefix: %1",
-			successThisThread: "✅ Group prefix changed!\n🆕 New prefix: %1"
+			usage:"❌Usage: prefix <newPrefix> | prefix reset | prefix <newPrefix> -g",
+			reset:"✅Prefix reset successful!\n🔰 System prefix: %1",
+			onlyAdmin:"⛔Only bot admin can change global prefix.",
+			confirmGlobal:"⚙️Global prefix change requested\n👉React with emoji to confirm.                                                         ",                           
+			confirmThisThread:"🛠️Group prefix change requested\n👉React with emoji to confirm.                                                      ",                             
+			successGlobal:"✅ Global prefix changed!\n🆕 New prefix: %1",
+			successThisThread:"✅ Group prefix changed!\n🆕 New prefix: %1"
 		}
 	},
 
@@ -112,19 +112,19 @@ module.exports = {
 		const time = moment().tz("Asia/Dhaka").format("hh:mm A");
 		const date = moment().tz("Asia/Dhaka").format("DD MMM YYYY");
 
-		const owner = global.GoatBot.config.adminName || "亗ARIFUL";
+		const owner = global.GoatBot.config.adminName || "𝐅𝐀𝐑𝐇𝐀𝐍";
 
 		return message.reply({
 			body:
-`╭━━━〔 ᭡PREFIX 〕━━━╮
-┃ 🏷️ Group : ${groupName}
-┃ 🔰 System : 『 ${systemPrefix} 』
-┃ 💬 Group  : 『 ${groupPrefix} 』
-┃ ⏰ Time   : ${time}
-┃ 📅 Date   : ${date}
-┃ 👑 Owner  : ${owner}
-┃ ⚡ Status : ONLINE
-╰━━━〔  🎁☑️👀 〕━━━╯`,
+`╭━━━〔《𓆩𝐏𝐑𝐄𝐅𝐈𝐗𓆪》〕━━━╮
+┃ 🏷️ 𓆩𝐆𝐑𝐎𝐔𝐏𓆪: 《𓆩${groupName}𓆪》
+┃ 🔰 𓆩𝐒𝐘𝐒𝐓𝐄𝐌𓆪: 《${systemPrefix}》
+┃ 💬 𓆩𝐆𝐑𝐎𝐔𝐏𓆪: 《${groupPrefix}》
+┃ ⏰ 𓆩𝐓𝐈𝐌𝐄𓆪: 《𓆩${time}𓆪》
+┃ 📅 𓆩𝐃𝐀𝐓𝐄𓆪:𓆩${date}𓆪
+┃ 👑 𓆩𝐎𝐖𝐍𝐄𝐑𓆪: 《𓆩${owner}𓆪》
+┃ ⚡ 𓆩𝐒𝐓𝐀𝐓𝐔𝐒𓆪: 《𓆩𝐎𝐍𝐋𝐈𝐍𝐄𓆪》
+╰━━━〔《𓆩𝐒𝐈𝐙𝐔𝐊𝐀𓆪》〕━━━╯`,
 			attachment: await getStreamFromURL(gif)
 		});
 	}

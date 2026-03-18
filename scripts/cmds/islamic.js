@@ -27,7 +27,6 @@ module.exports = {
 
     // 🎥 Sad videos list
     const links = [
-      "https://drive.google.com/uc?id=1607fc8LKeiwjPNIvdY448d5H2_yeQGSy",
     "https://drive.google.com/uc?id=14emH_6vF3fuJe2vmeC52e575TppboHne",
     "https://drive.google.com/uc?id=15APJbSuGLY7zCiZsAgU7HjCJeinYDX9K",
     "https://drive.google.com/uc?id=15ImMIXM_mqPM8hXpQNPLTGCrm9sh0RPS",

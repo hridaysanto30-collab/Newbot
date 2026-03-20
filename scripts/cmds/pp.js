@@ -1,84 +1,76 @@
-module.exports.config = {
- name: "pp",
- alishes: "uid, pp", 
- version: "2.0.0",
- hasPermssion: 0,
- credits: "SUJON",
- description: "Get a user's profile picture (UID, reply, mention, full name or link).",
- commandCategory: "Công cụ",
- cooldowns: 0
-};
+const axios = require("axios");
+const fs = require("fs-extra");
+const request = require("request");
 
-module.exports.run = async function({ event, api, args }) {
- const fs = global.nodemodule["fs-extra"];
- const request = global.nodemodule["request"];
+module.exports = {
+  config: {
+    name: "pp",
+    version: "1.0.0",
+    author: "MOHAMMAD AKASH",
+    countDown: 3,
+    role: 0,
+    shortDescription: "Facebook প্রোফাইল পিকচার দেখাবে 📸",
+    longDescription: "যেকোনো ইউজারের ফেসবুক প্রোফাইল পিকচার দেখা যাবে (নিজে, রিপ্লাই বা লিংক থেকে)।",
+    category: "media",
+    guide: {
+      en: "{pn} [reply/@mention/link]"
+    }
+  },
 
- let uid;
+  onStart: async function ({ api, event, args, usersData }) {
+    const cachePath = __dirname + "/cache/profile.png";
 
- // ===== Helper: Full Name Mention Detection =====
- async function getUIDByFullName(api, threadID, body) {
- if (!body.includes("@")) return null;
- const match = body.match(/@(.+)/);
- if (!match) return null;
+    try {
+      let uid;
 
- const targetName = match[1].trim().toLowerCase().replace(/\s+/g, " ");
- const threadInfo = await api.getThreadInfo(threadID);
- const users = threadInfo.userInfo || [];
+      // ১️⃣ রিপ্লাই করা মেসেজের ইউজারের প্রোফাইল
+      if (event.type === "message_reply") {
+        uid = event.messageReply.senderID;
+      }
 
- const user = users.find(u => {
- if (!u.name) return false;
- const fullName = u.name.trim().toLowerCase().replace(/\s+/g, " ");
- return fullName === targetName;
- });
+      // ২️⃣ @mention করা ইউজারের প্রোফাইল
+      else if (Object.keys(event.mentions || {}).length > 0) {
+        uid = Object.keys(event.mentions)[0];
+      }
 
- return user ? user.id : null;
- }
+      // ৩️⃣ লিংক দেওয়া থাকলে
+      else if (args[0] && args[0].includes(".com/")) {
+        const resID = await api.getUID(args[0]);
+        uid = resID;
+      }
 
- // ===== Determine UID =====
- if (event.type === "message_reply") {
- uid = event.messageReply.senderID;
- } 
- else if (args[0]) {
- if (args[0].indexOf(".com/") !== -1) {
- uid = await api.getUID(args[0]);
- } 
- else if (args.join(" ").includes("@")) {
- uid = Object.keys(event.mentions || {})[0];
- if (!uid) {
- uid = await getUIDByFullName(api, event.threadID, args.join(" "));
- }
- } 
- else {
- uid = args[0];
- }
- } 
- else {
- uid = event.senderID;
- }
+      // ৪️⃣ কিছু না দিলে নিজের প্রোফাইল
+      else {
+        uid = event.senderID;
+      }
 
- if (!uid) {
- return api.sendMessage("❌ User detect করা যায়নি!", event.threadID, event.messageID);
- }
+      const name = await usersData.getName(uid);
 
- // ===== Get user info =====
- const userInfo = await api.getUserInfo(uid);
- const name = userInfo[uid]?.name || "Unknown User";
+      const imageUrl = `https://graph.facebook.com/${uid}/picture?height=1500&width=1500&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
 
- // ===== Download profile picture =====
- const pathImg = __dirname + "/cache/pp.png";
-
- const callback = () => api.sendMessage({
- body: `✿•≫────•『PP』•────≪•✿
+      const callback = () => {
+        api.sendMessage(
+          {
+            body: `✿•≫────•『PP』•────≪•✿
 𝐇𝐞𝐫𝐞 𝐢𝐬 𝐭𝐡𝐞 𝐩𝐫𝐨𝐟𝐢𝐥𝐞 𝐩𝐢𝐜𝐭𝐮𝐫𝐞 🌸
 𝐍𝐞 𝐭𝐨𝐫 𝐩𝐢𝐜: 🙂 ${name}
 𝐈𝐝: ${uid}
 ✿•≫───────────────≪•✿`,
- attachment: fs.createReadStream(pathImg)
- }, event.threadID, () => fs.unlinkSync(pathImg), event.messageID);
+            attachment: fs.createReadStream(cachePath)
+          },
+          event.threadID,
+          () => fs.unlinkSync(cachePath),
+          event.messageID
+        );
+      };
 
- const url = `https://graph.facebook.com/${uid}/picture?height=1500&width=1500&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
+      request(encodeURI(imageUrl))
+        .pipe(fs.createWriteStream(cachePath))
+        .on("close", callback);
 
- return request(encodeURI(url))
- .pipe(fs.createWriteStream(pathImg))
- .on("close", () => callback());
+    } catch (err) {
+      console.error(err);
+      api.sendMessage("⚠️ কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করো ভাই 😭", event.threadID, event.messageID);
+    }
+  }
 };

@@ -32,7 +32,7 @@ module.exports = {
 
   onStart: async function ({ api, event, message }) {
     const { threadID, messageID } = event;
-    const imgURL = "https://i.imgur.com/puH5Rfb.jpeg"; // তোমার দেওয়া ইমেজ লিংক
+    const imgURL = "https://i.imgur.com/flVAtpL.jpeg"; // তোমার দেওয়া ইমেজ লিংক
     const cacheDir = path.join(__dirname, "cache");
     const imgPath = path.join(cacheDir, `sysinfo_${threadID}.png`);
 

@@ -24,6 +24,8 @@ longDescription: "One emoji triggers multiple voices, sent randomly 😘",
     const emojiAudioMap = {
       "🥱": ["https://files.catbox.moe/9pou40.mp3"],
       "😁": ["https://files.catbox.moe/60cwcg.mp3"],
+      "😆": ["https://files.catbox.moe/qg6hz1.mp3"],
+      "😄": ["https://files.catbox.moe/qg6hz1.mp3"],
       "😌": ["https://files.catbox.moe/epqwbx.mp3"],
       "🥺": ["https://files.catbox.moe/wc17iq.mp3"],
       "🤭": ["https://files.catbox.moe/cu0mpy.mp3"],

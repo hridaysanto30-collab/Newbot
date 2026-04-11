@@ -7,7 +7,7 @@ module.exports = {
   config: {
     name: "kola",
     version: "2.9.2",
-    author: "Milon Pro",
+    author: "FARHAN-KHAN",
     countDown: 5,
     role: 0,
     category: "fun",
@@ -19,10 +19,10 @@ module.exports = {
   },
 
 /* --- [ 🔐 FILE_CREATOR_INFORMATION ] ---
- * 🤖 BOT NAME: ⎯⎯༢ 𝗤͜͡𝗨𝗘𝗘⃟𝗡 ⊰
- * 👤 OWNER: ARIFUL
- * 📍 LOCATION: NARAYANGANJ, BANGLADESH
- * 🛠️ PROJECT: MILON BOT PROJECT (2026)
+ * 🤖 BOT NAME: SIZUKA BOT
+ * 👤 OWNER: FARHAN KHAN 
+ * 📍 LOCATION: CHUADANGA, BANGLADESH
+ * 🛠️ PROJECT: FARHAN BOT PROJECT (2026)
  * --------------------------------------- */
 
   onChat: async function ({ api, event, message, commandName }) {

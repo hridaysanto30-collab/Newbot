@@ -8,7 +8,7 @@ module.exports = {
     name: "ephoto",
     aliases: ["ep"],
     version: "1.3.0",
-    author: "IMRAN (Fixed by Milon)",
+    author: "FARHAN-KHAN",
     role: 0,
     countDown: 5,
     category: "textmaker",

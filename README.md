@@ -1,7 +1,7 @@
 <!-- 🔥 VIDEO STYLE BANNER (CLICKABLE) -->
 <p align="center">
   <a href="https://youtu.be/YOUR_VIDEO_LINK">
-    <img src="https://i.imgur.com/2TmH4bP.gif" width="100%">
+    <img src="https://i.imgur.com/hL3z57w.gif" width="100%">
   </a>
 </p>
 

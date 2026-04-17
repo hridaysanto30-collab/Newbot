@@ -1,4 +1,4 @@
-const AUTHOR = "FARHAN-KHAN"; // 🔒 এই নাম কেউ চেঞ্জ করতে পারবেন না
+const AUTHOR = "UDAY HASAN SIYAM"; // 🔒 এই নাম কেউ চেঞ্জ করতে পারবেন না
 
 module.exports = {  
   config: {  
@@ -47,7 +47,7 @@ module.exports = {
 🚻 Gender: ${gender}  
 🔗 Profile: https://facebook.com/${uid}  
   
-─꯭─⃝͎̽𓆩𝐅𝐀𝐑𝐇𝐀𝐍 𝐀𝐑 𝐁𝐎𝐓‣᭄𓆪___//😽🩵🪽`  
+─꯭─⃝͎̽𓆩𝐔𝐃𝐀𝐘 𝐇𝐀𝐒𝐀𝐍 𝐒𝐈𝐘𝐀𝐌 𝐁𝐎𝐓‣᭄𓆪___//😽🩵🪽`  
       );  
   
     } catch (err) {  

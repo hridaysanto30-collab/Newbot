@@ -5,7 +5,7 @@ module.exports = {
     version: "2.1",
     author: "MR_FARHAN",
     countDown: 10,
-    role: 0,
+    role: 1,
     shortDescription: {
       en: "Change/reset nickname of all members (safe pro)"
     },

@@ -1,59 +1,64 @@
 const fs = require("fs");
 
+const AUTHOR = "SIYAM"; // 🔒 DO NOT CHANGE
+
 module.exports = {
 	config: {
 		name: "all",
-		version: "1.2",
-		author: "FARHAN-KHAN", // 🔒 DO NOT CHANGE
+		version: "2.0",
+		author: AUTHOR, // 🔒 LOCKED
 		countDown: 5,
 		role: 1,
 		description: {
-			vi: "Tag tất cả thành viên trong nhóm chat của bạn",
-			en: "Tag all members in your group chat"
+			en: "Tag all members with stylish message"
 		},
-		category: "box chat",
-		guide: {
-			vi: "   {pn} [nội dung | để trống]",
-			en: "   {pn} [content | empty]"
-		}
+		category: "box chat"
 	},
 
-	onStart: async function ({ message, event, args }) {
+	onStart: async function ({ message, event }) {
 
 		// 🔒 AUTHOR LOCK SYSTEM
-		if (module.exports.config.author !== "FARHAN-KHAN") {
+		if (module.exports.config.author !== AUTHOR) {
 			console.log("⛔ AUTHOR MODIFIED! FILE LOCKED.");
 			process.exit(1);
 		}
 
 		const { participantIDs } = event;
-		const lengthAllUser = participantIDs.length;
 		const mentions = [];
 
-		let body = args.join(" ") || "@all";
-		let bodyLength = body.length;
-		let i = 0;
+		// 🔥 Stylish Message
+		let body = `╔═══❖•ೋ° 🌟 °ೋ•❖═══╗
+📢 𝐀𝐓𝐓𝐄𝐍𝐓𝐈𝐎𝐍 𝐄𝐕𝐄𝐑𝐘𝐎𝐍𝐄 📢
+╚═══❖•ೋ° 🌟 °ೋ•❖═══╝
+
+👥 @everyone
+🚨 চিপা থেকে বাহির হও এখনই!
+
+❗ না হলে...
+❄️ চিপায় ঠান্ডা দিমু 😼🔥
+
+👑 বস সিয়াম এর রাগ উঠতাছে 💙
+
+━━━━━━━━━━━━━━━━━━━
+
+🔗 Facebook Link:
+🌐 https://www.facebook.com/profile.php?id=61568411310748 ✨
+
+━━━━━━━━━━━━━━━━━━━
+
+⚡ Respect the Boss 😎
+`;
+
+		let index = body.indexOf("@everyone");
 
 		for (const uid of participantIDs) {
-			let fromIndex = 0;
-
-			if (bodyLength < lengthAllUser) {
-				body += body[bodyLength - 1];
-				bodyLength++;
-			}
-
-			if (body.slice(0, i).lastIndexOf(body[i]) != -1)
-				fromIndex = i;
-
 			mentions.push({
-				tag: body[i],
+				tag: "@",
 				id: uid,
-				fromIndex
+				fromIndex: index
 			});
-
-			i++;
 		}
 
-		message.reply({ body, mentions });
+		return message.reply({ body, mentions });
 	}
 };

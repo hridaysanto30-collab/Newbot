@@ -3,7 +3,7 @@ module.exports = {
 		name: "voice",
 		aliases: ["Voice","fk"],
 		version: "1.8",
-		author: "Rocky Chowdhury", // এই নাম পরিবর্তন করলে কমান্ড কাজ করবে না
+		author: "Rocky Chowdhury",
 		countDown: 5,
 		role: 0,
 		shortDescription: "Random captions with video and owner link",
@@ -15,19 +15,15 @@ module.exports = {
 	onStart: async function ({ message, api }) {
 		const { threadID, messageID } = message;
 
-		// --- AUTHOR SECURITY ---
-		// যদি কেউ config থেকে author নাম পরিবর্তন করে, তবে এটি কাজ করবে না
 		if (this.config.author !== "Rocky Chowdhury") {
 			return message.reply("⚠️ [ SECURITY ALERT ]\nAuthor name change detected! This command will not work unless the original author 'Rocky Chowdhury' is set.");
 		}
 
-		// ১. লোডিং রিঅ্যাক্ট (Error fix সহ)
 		try {
 			api.setMessageReaction("⏳", messageID, () => {}, true);
 		} catch (e) {}
 
-		// ২. পার্সোনালাইজড লোডিং মেসেজ
-		const loadingMsg = await message.reply("⚡ 𝗙𝗔𝗥𝗛𝗔𝗡 𝗕𝗢𝗦𝗦 𝗔𝗥 𝗩𝗜𝗗𝗘𝗢 𝗟𝗢𝗔𝗗𝗜𝗡𝗚 𝗛𝗢𝗦𝗦𝗘... ⚡");
+		const loadingMsg = await message.reply("⚡ 𝗦𝗜𝗬𝗔𝗠 𝗕𝗢𝗦𝗦 𝗔𝗥 𝗩𝗜𝗗𝗘𝗢 𝗟𝗢𝗔𝗗𝗜𝗡𝗚 𝗛𝗢𝗦𝗦𝗘... ⚡");
 
 		const data = [
 			{
@@ -67,28 +63,23 @@ module.exports = {
 				link: "https://files.catbox.moe/src6qb.mp4"
 			},
 			{
-				cap: `চুপ থাকা সবসময় দুর্বলতা না 🤫\nকখনো এটা শক্তি 💯\nসব কথা বলার দরকার নেই 😌s�`,
+				cap: `চুপ থাকা সবসময় দুর্বলতা না 🤫\nকখনো এটা শক্তি 💯\nসব কথা বলার দরকার নেই 😌`,
 				link: "https://files.catbox.moe/9iqdo0.mp4"
 			}
 		];
 
 		try {
-			// ৩. র‍্যান্ডম আইটেম সিলেক্ট
 			const randomItem = data[Math.floor(Math.random() * data.length)];
 
-			// ৪. ইনবক্স লিংক এবং বস মেসেজ স্টাইল
-			const footer = `\n✢━━━━━━━━━━━━━━━✢\n--❖(✷‿𝐒𝐈𝐙𝐔𝐊𝐀-𝐁𝐎𝐓‿✷)❖--\n✢━━━━━━━━━━━━━━━✢\n[ফা্ঁর্ঁহা্ঁন্ঁ ব্ঁসে্ঁর্ঁ ভ্ঁয়ে্ঁস্ঁ ভি্ঁডি্ঁও্ঁ]\n✢━━━━━━━━━━━━━━━✢\n(✷‿𝐎𝐖𝐍𝐄𝐑:-𝐑𝐉-𝐅𝐀𝐑𝐇𝐀𝐍‿✷)`;
+			const footer = `\n✢━━━━━━━━━━━━━━━✢\n--❖(✷‿𝐍𝐈𝐉𝐇𝐔𝐌-𝐁𝐎𝐓‿✷)❖--\n✢━━━━━━━━━━━━━━━✢\n[সিয়াম বসের ফ্রেন্ড ফারহানের ভয়েজ]\n✢━━━━━━━━━━━━━━━✢\n(✷‿𝐎𝐖𝐍𝐄𝐑:-𝐒𝐈𝐘𝐀𝐌‿✷)`;
 
-			// ৫. ভিডিও স্ট্রিম নেওয়া
 			const videoStream = await global.utils.getStreamFromURL(randomItem.link);
 
-			// ৬. ভিডিও এবং ফুল ক্যাপশন পাঠানো
 			await message.reply({
 				body: randomItem.cap + footer,
 				attachment: videoStream
 			});
 
-			// ৭. ফিনিশিং টাচ (Delete loading msg & Success react)
 			api.unsendMessage(loadingMsg.messageID);
 			api.setMessageReaction("✅", messageID, () => {}, true);
 

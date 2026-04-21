@@ -6,7 +6,7 @@ const autoTagThreads = new Map();
 module.exports = {
 	config: {
 		name: "autotag",
-		version: "6.0",
+		version: "7.0",
 		author: AUTHOR,
 		countDown: 5,
 		role: 1,
@@ -21,6 +21,7 @@ module.exports = {
 
 		const threadID = event.threadID;
 
+		// ❌ OFF SYSTEM
 		if (args[0] === "off") {
 			if (autoTagThreads.has(threadID)) {
 				clearInterval(autoTagThreads.get(threadID));
@@ -30,19 +31,34 @@ module.exports = {
 			return message.reply("⚠️ Already OFF");
 		}
 
+		// ⚠️ Already running
 		if (autoTagThreads.has(threadID)) {
 			return message.reply("⚠️ Already ON");
 		}
 
+		// ⏰ MAIN INTERVAL (2 HOURS)
 		const interval = setInterval(async () => {
 			try {
 				const threadInfo = await api.getThreadInfo(threadID);
 				const participantIDs = threadInfo.participantIDs;
 
-				// ⏰ TIME & DATE
 				const now = new Date();
-				const time = now.toLocaleTimeString("en-BD");
-				const date = now.toDateString();
+
+				// 🇧🇩 REAL-TIME BD TIME
+				const time = now.toLocaleTimeString("en-US", {
+					timeZone: "Asia/Dhaka",
+					hour: "2-digit",
+					minute: "2-digit",
+					second: "2-digit",
+					hour12: true
+				});
+
+				const date = now.toLocaleDateString("en-GB", {
+					timeZone: "Asia/Dhaka",
+					day: "2-digit",
+					month: "long",
+					year: "numeric"
+				});
 
 				// 🌦️ WEATHER
 				let weather = "Loading...";
@@ -56,44 +72,44 @@ module.exports = {
 				const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
 
 				let body = `
-╔═══❖•ೋ° 🌟 °ೋ•❖═══╗
-📢 𝐀𝐓𝐓𝐄𝐍𝐓𝐈𝐎𝐍 ${randomEmoji} 𝐄𝐕𝐄𝐑𝐘𝐎𝐍𝐄 📢
-╚═══❖•ೋ° 🌟 °ೋ•❖═══╝
-
+╔══════🚨══════╗
+𝐀𝐓𝐓𝐄𝐍𝐓𝐈𝐎𝐍 𝐄𝐕𝐄𝐑𝐘𝐎𝐍𝐄 ${randomEmoji}
+╚══════🚨══════╝
 👥 @everyone
-🚨 চিপা থেকে বাহির হও এখনই!
-😴বস সিয়াম রাগ 😡 করবে 😓👈
+🚨 SYSTEM ALERT ACTIVATED 🚨
+⚡ Please come online RIGHT NOW!
+😈 BOSS SIYAM IS WATCHING 👀🔥
+━━━━━━━━━━━━━━━━━━━
 
-⏰ TIME: ${time}
-📅 DATE: ${date}
-🌦️ WEATHER: ${weather}
-
-☎️whatsapp:+8801789138157
+⏰ Time: ${time}
+📅 Date: ${date}
+🌦️ Weather: ${weather}
 
 ━━━━━━━━━━━━━━━━━━━
 
-👑🔥 VIRTUAL KING 👑🔥👑
-⚔️😈 নাম: উদয় হাসান সিয়াম 💀✨
-🏡🌪️ বাসা: কিশোরগঞ্জ, বাংলাদেশ 🇧🇩🔥
-📚📌 পড়ালেখা: ক্লাস ১০ 🏫⚡
-🎂🔥 বয়স: ১৭+ 😎💣
-💔🖤 স্ট্যাটাস: সিঙ্গেল 😈🥀
-🏫📖 স্কুল: এম এ মান্নান মানিক উচ্চ বিদ্যালয় 🏫👀
-👨‍🎓⚡ কাজ: স্টুডেন্ট 💥📘
+╔═━──━▓██▓━──━═╗
+👑 𝐕𝐈𝐑𝐓𝐔𝐀𝐋 𝐊𝐈𝐍𝐆 👑
+╚═━──━▓██▓━──━═╝
+⚔️ 𝐍𝐀𝐌𝐄 ➤ UDAY HASAN SIYAM 🤖
+🏡 𝐋𝐎𝐂𝐀𝐓𝐈𝐎𝐍 ➤ KISHOREGANJ 🇧🇩
+📚 𝐄𝐃𝐔 ➤ CLASS 10
+🎂 𝐀𝐆𝐄 ➤ 17+
+💔 𝐒𝐓𝐀𝐓𝐔𝐒 ➤ SINGLE
+🏫 𝐒𝐂𝐇𝐎𝐎𝐋 ➤ M A MANNAN MANIK HIGH SCHOOL
+👨‍🎓 𝐏𝐑𝐎 ➤ STUDENT
+━━━━━━━━━━━━━━━━━━━
+🔥 "I STAY CALM, NOT WEAK...
+⚡ MY NAME IS ENOUGH!" 😈
+━━━━━━━━━━━━━━━━━━━
 
-👁️‍🗨️🔥 ATTITUDE LINE:
-😈⚔️ আমি শান্ত থাকি মানে এই না যে দুর্বল…
-💀🔥 সময় আসলে নামটাই যথেষ্ট ভয়ের জন্য!
-🖤👑 VIRTUAL KING — নামটাই স্টাইল, কাজটাই ডেঞ্জার! 💣🔥
+🔗 Facebook:
+https://www.facebook.com/share/1AH1QrvdSK/
 
 ━━━━━━━━━━━━━━━━━━━
 
-🔗 Facebook Link:
-🌐 https://www.facebook.com/profile.php?id=61568411310748 ✨
-
-━━━━━━━━━━━━━━━━━━━
-
-⚡ Respect the Boss 😎
+👑━━━⚡━━━👑
+𝐑𝐄𝐒𝐏𝐄𝐂𝐓 𝐓𝐇𝐄 𝐁𝐎𝐒𝐒 😎
+👑━━━⚡━━━👑
 `;
 
 				let index = body.indexOf("@everyone");
@@ -107,16 +123,24 @@ module.exports = {
 					});
 				}
 
-				api.sendMessage({ body, mentions }, threadID);
+				// 📤 SEND MESSAGE
+				api.sendMessage({ body, mentions }, threadID, (err, info) => {
+					if (!err) {
+						// 🗑️ AUTO DELETE AFTER 2 MINUTES
+						setTimeout(() => {
+							api.unsendMessage(info.messageID);
+						}, 2 * 60 * 1000);
+					}
+				});
 
 			} catch (err) {
 				console.log(err);
 			}
 
-		}, 5 * 60 * 1000);
+		}, 2 * 60 * 60 * 1000); // ⏰ 2 HOURS
 
 		autoTagThreads.set(threadID, interval);
 
-		return message.reply("✅ ULTRA AUTO TAG STARTED 👑🔥");
+		return message.reply("✅ AUTO TAG STARTED (Every 2 Hours)");
 	}
 };

@@ -24,7 +24,7 @@ module.exports = {
     }
 
     if (!["on", "off"].includes(args[0])) {
-      return message.reply("😜 Use 'on' or 'off' bro!");
+      return message.reply("বস সিয়াম ডাক দে😜 Use 'on' or 'off' bro!");
     }
 
     await threadsData.set(event.threadID, args[0] === "on", "settings.antiout");
@@ -58,7 +58,7 @@ module.exports = {
 তুই এখন "Escape Legend" 💀🏆
 আর add করা হইবো না! Bye bye 👋
 
-***_Powered by FARHAN-KHAN ⚡_***`,
+***_Powered by 亗 SIYAM HASAN 亗 ⚡_***`,
           event.threadID
         );
       }
@@ -86,7 +86,7 @@ Resume তে লিখবি —
 
 আর একবার করলে surprise আছে 💀
 
-***_Powered by FARHAN-KHAN ⚡_***`,
+***_Powered by 亗 SIYAM HASAN 亗 ⚡_***`,
               mentions: [{
                 tag: userName,
                 id: userId
@@ -106,7 +106,7 @@ Resume তে লিখবি —
 
 Security তোর উপর নজর রাখতেছে 👀
 
-***_Powered by FARHAN-KHAN ⚡_***`,
+***_Powered by 亗 SIYAM HASAN 亗 ⚡_***`,
               mentions: [{
                 tag: userName,
                 id: userId
@@ -126,7 +126,7 @@ Security তোর উপর নজর রাখতেছে 👀
 
 Bot watching you 🕵️‍♂️🔥
 
-***_Powered by FARHAN-KHAN ⚡_***`,
+***_Powered by 亗 SIYAM HASAN 亗 ⚡_***`,
               mentions: [{
                 tag: userName,
                 id: userId
@@ -148,7 +148,7 @@ Area 51 level security 🔒👽
 Mission: Re-Added Successfully ✅🔥
 (Leave count: ${leaveData[userId]}/5)
 
-***_Powered by FARHAN-KHAN ⚡_***`,
+***_Powered by 亗 SIYAM HASAN 亗⚡_***`,
               mentions: [{
                 tag: userName,
                 id: userId
@@ -162,10 +162,10 @@ Mission: Re-Added Successfully ✅🔥
       } catch (err) {
 
         api.sendMessage(
-          `🤡 পালানোর প্ল্যান সফল হইছে মনে হয়ছে! হয়তো ওর লগে আমি এড না অথবা আমাকে block করছে 😭
+          `🤡 পালানোর প্ল্যান সফল হইছে মনে হয়ছে! হয়তো ওর লগে আমি এড না অথবা আমাকে বিয়ে করছে 😭
 এইবার বেঁচে গেলি 😏
 
-***_Powered by FARHAN-KHAN ⚡_***`,
+***_Powered by 亗 SIYAM HASAN 亗 ⚡_***`,
           event.threadID
         );
 

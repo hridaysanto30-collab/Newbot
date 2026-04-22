@@ -5,7 +5,7 @@ const path = require("path");
 module.exports = {
   config: {
     name: "owner",
-    version: "1.3.0",
+    version: "1.3.2",
     author: "Farhan-Khan",
     role: 0,
     shortDescription: "Owner information with image",
@@ -21,20 +21,21 @@ module.exports = {
  
  ‎⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆ 
   [🤖]↓:𝐁𝐎𝐓→𝐀𝐃𝐌𝐈𝐍:↓
-  ➤ 『 𝐑𝐉-𝐅𝐀𝐑𝐇𝐀𝐍 』
+  ➤ 『 𝐔𝐃𝐀𝐘 𝐇𝐀𝐒𝐀𝐍 𝐒𝐈𝐘𝐀𝐌 』
  ‎⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
 
 ╠══❖『𝐁𝐈𝐎 𝐀𝐃𝐌𝐈𝐍』❖══╣
  ⊱༅༎😽💚༅༎⊱
 
--আমি ভদ্র, বেয়াদব দুটোই 🥱✌️  
--তুমি যেটা ডি'জার্ভ করো, আমি সেটাই দেখাবো 🙂  
+-আমি নিজের মতোই চলি 😎🔥  
+-আমি কপি না, আমি আলাদা 🖤  
+-যারে ভালোবাসি, শেষ পর্যন্ত 💯  
 
   ⊱༅༎😽💚༅༎⊱
 ╠═════════════════╣
 
 [🏠]↓:𝐀𝐃𝐃𝐑𝐄𝐒𝐒:↓
-➤ 『 𝐂𝐇𝐔𝐀𝐃𝐀𝐍𝐆𝐀 』
+➤ 『 𝐊𝐈𝐒𝐇𝐎𝐑𝐄𝐆𝐀𝐍𝐉 』
 ‎
 ⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
 
@@ -48,24 +49,24 @@ module.exports = {
 
 ‎⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
 
-[💞]↓:𝐑𝐄𝐋𝐀𝐓𝐈𝐎𝐍𝐒𝐇𝐈𝐏:↓
+[💞]↓:𝐑𝐑𝐄𝐋𝐀𝐓𝐈𝐎𝐍𝐒𝐇𝐈𝐏:↓
 ➤ 『 𝐒𝐈𝐍𝐆𝐋𝐄 』
 
 ‎⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
 
-[🧑‍🔧]↓:𝐖𝐎𝐑𝐊:↓
-➤ 『 𝐉𝐎𝐁 』
+[🧑‍🎓]↓:𝐖𝐎𝐑𝐊:↓
+➤ 『 𝐒𝐓𝐔𝐃𝐄𝐍𝐓 』
 
 ‎⋆✦⋆═══🅲🅾🅽🆃🅰🅲🆃═══⋆✦⋆
 
 [📞] 𝗪𝗛𝗔𝗧𝗦𝗔𝗣𝗣
-➤ https://wa.me/+8801934640061
+➤ https://wa.me/+8801789138157
 
 [🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❶)
-➤ https://m.me/MR.FARHAN.420
+➤ https://www.facebook.com/share/14k1GZFVH2T/
 
 [🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❷)
-➤ https://www.facebook.com/MR.FARHAN.420
+➤ https://www.facebook.com/share/14k1GZFVH2T/
 
 ╚═══❖𝗧𝗛𝗔𝗡𝗞 𝗬𝗢𝗨❖═══╝`;
 
@@ -74,7 +75,8 @@ module.exports = {
 
     if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir);
 
-    const imgLink = "https://i.imgur.com/aeYswQs.jpeg";
+    // ✅ NEW IMAGE LINK SET
+    const imgLink = "https://i.ibb.co/k2v8jSjW/image0.jpg";
 
     const send = () => {
       api.sendMessage(

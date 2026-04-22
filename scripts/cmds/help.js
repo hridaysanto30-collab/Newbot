@@ -3,26 +3,29 @@ const { getPrefix, getStreamFromURL } = global.utils;
 const { commands } = global.GoatBot;
 const fs = require("fs");
 
-let xfont = null;
-let yfont = null;
-let categoryEmoji = null;
+let xfont = {};
+let yfont = {};
+let categoryEmoji = {};
 
-const HELP_GIF = "https://i.imgur.com/pfoGekT.mp4";
+// 🎬 UPDATED HELP VIDEO (YOUR LINK)
+const HELP_GIF = "https://files.catbox.moe/4j7c2m.mp4";
 
 // 🔒 AUTHOR LOCK SYSTEM
 const AUTHOR_NAME = "FARHAN-KHAN";
-const FILE_PATH = __filename;
 
 function checkAuthorLock() {
   try {
-    const fileData = fs.readFileSync(FILE_PATH, "utf-8");
-    if (!fileData.includes(`author: "${AUTHOR_NAME}"`)) {
-      console.log("❌ AUTHOR CHANGED! FILE LOCKED.");
+    const data = fs.readFileSync(__filename, "utf-8");
+    const clean = data.replace(/\s/g, "");
+    const target = `author:"${AUTHOR_NAME}"`;
+
+    if (!clean.includes(target)) {
+      console.log("❌ AUTHOR CHANGED!");
       return false;
     }
     return true;
   } catch (e) {
-    console.log("❌ ERROR CHECKING AUTHOR LOCK");
+    console.log("❌ LOCK ERROR:", e);
     return false;
   }
 }
@@ -34,20 +37,18 @@ async function loadResources() {
       axios.get("https://raw.githubusercontent.com/Saim-x69x/sakura/main/yfont.json"),
       axios.get("https://raw.githubusercontent.com/Saim-x69x/sakura/main/category.json")
     ]);
-    xfont = x.data;
-    yfont = y.data;
-    categoryEmoji = c.data;
+
+    xfont = x.data || {};
+    yfont = y.data || {};
+    categoryEmoji = c.data || {};
   } catch (e) {
-    console.error("[HELP] Resource load failed", e);
-    xfont = xfont || {};
-    yfont = yfont || {};
-    categoryEmoji = categoryEmoji || {};
+    console.error("❌ Resource Load Failed");
   }
 }
 
 function fontConvert(text, type = "command") {
   const map = type === "category" ? xfont : yfont;
-  if (!map) return text;
+  if (!map || typeof map !== "object") return text;
   return text.split("").map(c => map[c] || c).join("");
 }
 
@@ -56,18 +57,27 @@ function getCategoryEmoji(cat) {
 }
 
 function roleText(role) {
-  const roles = { 0: "All Users", 1: "Group Admins", 2: "Bot Admin" };
+  const roles = {
+    0: "All Users",
+    1: "Group Admins",
+    2: "Bot Admin"
+  };
   return roles[role] || "Unknown";
 }
 
 function findCommand(name) {
   name = name.toLowerCase();
+
   for (const [, cmd] of commands) {
-    const a = cmd.config?.aliases;
-    if (cmd.config?.name === name) return cmd;
-    if (Array.isArray(a) && a.includes(name)) return cmd;
-    if (typeof a === "string" && a === name) return cmd;
+    if (!cmd?.config) continue;
+
+    if (cmd.config.name === name) return cmd;
+
+    const aliases = cmd.config.aliases;
+    if (Array.isArray(aliases) && aliases.includes(name)) return cmd;
+    if (typeof aliases === "string" && aliases === name) return cmd;
   }
+
   return null;
 }
 
@@ -75,8 +85,8 @@ module.exports = {
   config: {
     name: "help",
     aliases: ["menu"],
-    version: "2.0",
-    author: "FARHAN-KHAN", // 🔒 LOCKED
+    version: "2.2",
+    author: "FARHAN-KHAN",
     role: 0,
     category: "info",
     shortDescription: "Show all commands",
@@ -85,31 +95,40 @@ module.exports = {
 
   onStart: async function ({ message, args, event, role }) {
 
-    // 🔒 CHECK AUTHOR BEFORE RUN
     if (!checkAuthorLock()) {
       return message.reply("❌ FILE LOCKED! DON'T CHANGE AUTHOR.");
     }
 
-    if (!xfont || !yfont || !categoryEmoji) await loadResources();
+    if (!xfont || !yfont) await loadResources();
+
     const prefix = getPrefix(event.threadID);
     const input = args.join(" ").trim();
 
     const categories = {};
+
     for (const [name, cmd] of commands) {
       if (!cmd?.config || cmd.config.role > role) continue;
+
       const cat = (cmd.config.category || "UNCATEGORIZED").toUpperCase();
+
       if (!categories[cat]) categories[cat] = [];
       categories[cat].push(name);
     }
 
+    // 🔍 CATEGORY VIEW
     if (args[0] === "-c" && args[1]) {
       const cat = args[1].toUpperCase();
-      if (!categories[cat])
+
+      if (!categories[cat]) {
         return message.reply(`❌ Category "${cat}" not found`);
+      }
 
       let msg = `╭─────✰『 ${getCategoryEmoji(cat)} ${fontConvert(cat, "category")} 』\n`;
-      for (const c of categories[cat].sort())
+
+      for (const c of categories[cat].sort()) {
         msg += `│⚡ ${fontConvert(c)}\n`;
+      }
+
       msg += `╰────────────✰\n`;
       msg += `> TOTAL: ${categories[cat].length}\n> PREFIX: ${prefix}`;
 
@@ -119,20 +138,23 @@ module.exports = {
       });
     }
 
+    // 📜 FULL LIST
     if (!input) {
-      let msg = `╭───────❁\n│✨ ‿𝐃-𝐒 𝐒 𝐈 𝐘 𝐀 𝐌 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧 ✨\n╰────────────❁\n`;
+      let msg = `╭───────❁\n│✨ 𝐃-𝐒 𝐒𝐈𝐘𝐀𝐌 HELP LIST ✨\n╰────────────❁\n`;
 
       for (const cat of Object.keys(categories).sort()) {
         msg += `╭─────✰『 ${getCategoryEmoji(cat)} ${fontConvert(cat, "category")} 』\n`;
-        for (const c of categories[cat].sort())
+
+        for (const c of categories[cat].sort()) {
           msg += `│⚡ ${fontConvert(c)}\n`;
+        }
+
         msg += `╰────────────✰\n`;
       }
 
       const total = Object.values(categories).reduce((a, b) => a + b.length, 0);
 
-      msg += `╭─────✰[🌟 𝐄𝐍𝐉𝐎𝐘 🌟]\n│> TOTAL COMMANDS: [${total}]\n│\n│> TYPE: [ ${prefix}HELP <COMMAND> ]\n│\n│> FB.LINK: [https://www.facebook.com/share/1LDy7c49aK/]\n╰────────────✰\n`;
-      msg += `╭─────✰\n│ 💖 ‿𝐍𝐈𝐉𝐇𝐔𝐌-𝗕𝗢𝗧 💖\n╰────────────✰`;
+      msg += `╭─────✰\n│ TOTAL COMMANDS: ${total}\n│ PREFIX: ${prefix}\n [https://www.facebook.com/share/1LDy7c49aK/]╰────────────✰`;
 
       return message.reply({
         body: msg,
@@ -140,16 +162,26 @@ module.exports = {
       });
     }
 
+    // 🔎 COMMAND INFO
     const cmd = findCommand(input);
-    if (!cmd) return message.reply(`❌ Command "${input}" not found`);
+
+    if (!cmd) {
+      return message.reply(`❌ Command "${input}" not found`);
+    }
 
     const c = cmd.config;
-    const aliasText = Array.isArray(c.aliases) ? c.aliases.join(", ") : c.aliases || "None";
+
+    const aliasText = Array.isArray(c.aliases)
+      ? c.aliases.join(", ")
+      : c.aliases || "None";
 
     let usage = "No usage";
+
     if (c.guide) {
-      if (typeof c.guide === "string") usage = c.guide;
-      else if (typeof c.guide === "object") usage = c.guide.en || Object.values(c.guide)[0] || "No usage";
+      usage = typeof c.guide === "string"
+        ? c.guide
+        : c.guide.en || Object.values(c.guide)[0];
+
       usage = usage.replace(/{pn}/g, `${prefix}${c.name}`);
     }
 

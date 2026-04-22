@@ -3,9 +3,10 @@ const moment = require("moment-timezone");
 
 const getStreamFromURL = global.utils.getStreamFromURL;
 
+// ✅ NEW VIDEO LINK
 const gifList = [
-"https://files.catbox.moe/hrzwco.mp4",
-"https://files.catbox.moe/hrzwco.mp4"
+  "https://files.catbox.moe/evpjnt.mp4",
+  "https://files.catbox.moe/evpjnt.mp4"
 ];
 
 const getRandomGif = () =>
@@ -14,23 +15,23 @@ const getRandomGif = () =>
 module.exports = {
 	config: {
 		name: "prefix",
-		version: "2.2",
+		version: "2.3",
 		author: "FARHAN-KHAN",
 		countDown: 5,
 		role: 0,
-		description: "Change & show bot prefix ",
+		description: "Change & show bot prefix",
 		category: "config"
 	},
 
 	langs: {
 		en: {
-			usage: "❌ 𝐔𝐬𝐚𝐠𝐞: 𝐩𝐫𝐞𝐟𝐢𝐱 <𝐧𝐞𝐰𝐏𝐫𝐞𝐟𝐢𝐱> | 𝐩𝐫𝐞𝐟𝐢𝐱 𝐫𝐞𝐬𝐞𝐭 | 𝐩𝐫𝐞𝐟𝐢𝐱 <𝐧𝐞𝐰𝐏𝐫𝐞𝐟𝐢𝐱> -g",
-			reset: "✅ 𝐏𝐫𝐞𝐟𝐢𝐱 𝐫𝐞𝐬𝐞𝐭 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥!\n🔰 𝐒𝐲𝐬𝐭𝐞𝐦 𝐩𝐫𝐞𝐟𝐢𝐱: %1",
-			onlyAdmin: "⛔ 𝐎𝐧𝐥𝐲 𝐛𝐨𝐭 𝐚𝐝𝐦𝐢𝐧 𝐜𝐚𝐧 𝐜𝐡𝐚𝐧𝐠𝐞 𝐠𝐥𝐨𝐛𝐚𝐥 𝐩𝐫𝐞𝐟𝐢𝐱.",
-			confirmGlobal: "__________________________________🗨️=𝐆𝐥𝐨𝐛𝐚𝐥 𝗽𝗿𝗲𝗳𝗶𝘅 𝗰𝗵𝗮𝗻𝗴𝗲 𝗿𝗲𝗾𝘂𝗲𝘀𝘁𝗲𝗱.\n👉=𝗥𝗲𝗮𝗰𝘁 𝘄𝗶𝘁𝗵 𝗲𝗺𝗼𝗷𝗶 𝘁𝗼 𝗰𝗼𝗻𝗳𝗶𝗿𝗺.✅.                                                                                                                                                                                   __________________________________",
-			confirmThisThread: "__________________________________🗨️=𝗚𝗿𝗼𝘂𝗽 𝗽𝗿𝗲𝗳𝗶𝘅 𝗰𝗵𝗮𝗻𝗴𝗲 𝗿𝗲𝗾𝘂𝗲𝘀𝘁𝗲𝗱.\n👉=𝗥𝗲𝗮𝗰𝘁 𝘄𝗶𝘁𝗵 𝗲𝗺𝗼𝗷𝗶 𝘁𝗼 𝗰𝗼𝗻𝗳𝗶𝗿𝗺.✅.                                                                                                                                                                                 __________________________________",
-			successGlobal: "✅ 𝐆𝐑𝐎𝐔𝐏 𝐏𝐑𝐄𝐅𝐈𝐗 𝐂𝐇𝐀𝐍𝐆𝐄𝐃!\n🆕 𝐍𝐄𝐖 𝐏𝐑𝐄𝐅𝐈𝐗: %1",
-			successThisThread: "✅ 𝐆𝐑𝐎𝐔𝐏 𝐏𝐑𝐄𝐅𝐈𝐗 𝐂𝐇𝐀𝐍𝐆𝐄𝐃!\n🆕 𝐍𝐄𝐖 𝐏𝐑𝐄𝐅𝐈𝐗: %1"
+			usage: "❌ 𝐔𝐬𝐚𝐠𝐞: 𝐩𝐫𝐞𝐟𝐢𝐱 <𝐧𝐞𝐰> | 𝐩𝐫𝐞𝐟𝐢𝐱 𝐫𝐞𝐬𝐞𝐭 | 𝐩𝐫𝐞𝐟𝐢𝐱 <𝐧𝐞𝐰> -g",
+			reset: "✅ 𝐏𝐫𝐞𝐟𝐢𝐱 𝐑𝐞𝐬𝐞𝐭 𝐒𝐮𝐜𝐜𝐞𝐬𝐬!\n🔰 𝐒𝐲𝐬𝐭𝐞𝐦: %1",
+			onlyAdmin: "⛔ 𝐎𝐧𝐥𝐲 𝐁𝐨𝐭 𝐀𝐝𝐦𝐢𝐧 𝐂𝐚𝐧 𝐂𝐡𝐚𝐧𝐠𝐞 𝐆𝐥𝐨𝐛𝐚𝐥 𝐏𝐫𝐞𝐟𝐢𝐱.",
+			confirmGlobal: "⚠️ 𝐆𝐥𝐨𝐛𝐚𝐥 𝐏𝐫𝐞𝐟𝐢𝐱 𝐂𝐡𝐚𝐧𝐠𝐞?\n👉 𝐑𝐞𝐚𝐜𝐭 𝐓𝐨 𝐂𝐨𝐧𝐟𝐢𝐫𝐦 ✅",
+			confirmThisThread: "⚠️ 𝐆𝐫𝐨𝐮𝐩 𝐏𝐫𝐞𝐟𝐢𝐱 𝐂𝐡𝐚𝐧𝐠𝐞?\n👉 𝐑𝐞𝐚𝐜𝐭 𝐓𝐨 𝐂𝐨𝐧𝐟𝐢𝐫𝐦 ✅",
+			successGlobal: "✅ 𝐆𝐋𝐎𝐁𝐀𝐋 𝐏𝐑𝐄𝐅𝐈𝐗 𝐂𝐇𝐀𝐍𝐆𝐄𝐃!\n🆕 %1",
+			successThisThread: "✅ 𝐆𝐑𝐎𝐔𝐏 𝐏𝐑𝐄𝐅𝐈𝐗 𝐂𝐇𝐀𝐍𝐆𝐄𝐃!\n🆕 %1"
 		}
 	},
 
@@ -40,10 +41,10 @@ module.exports = {
 
 		const gif = getRandomGif();
 
-	if (args[0] == 'reset') {
-	await threadsData.set(event.threadID, null, "data.prefix");
-	return message.reply(getLang("reset", global.GoatBot.config.prefix));
-	}
+		if (args[0] == 'reset') {
+			await threadsData.set(event.threadID, null, "data.prefix");
+			return message.reply(getLang("reset", global.GoatBot.config.prefix));
+		}
 
 		const newPrefix = args[0];
 		const setGlobal = args[1] === "-g";
@@ -110,21 +111,22 @@ module.exports = {
 		const groupName = threadInfo?.threadName || "Unknown Group";
 
 		const time = moment().tz("Asia/Dhaka").format("hh:mm A");
-		const date = moment().tz("Asia/Dhaka").format("DD MMM YYYY");
+		const date = moment().tz("DD MMM YYYY");
 
-		const owner = global.GoatBot.config.adminName || "𝐅𝐀𝐑𝐇𝐀𝐍";
+		// ✅ YOUR NAME SET
+		const owner = "UDAY HASAN SIYAM";
 
 		return message.reply({
 			body:
-`╭━━━〔《𓆩𝐏𝐑𝐄𝐅𝐈𝐗𓆪》〕━━━╮
-┃ 🏷️ 𓆩𝐆𝐑𝐎𝐔𝐏𓆪: 《𓆩${groupName}𓆪》
-┃ 🔰 𓆩𝐒𝐘𝐒𝐓𝐄𝐌𓆪: 《${systemPrefix}》
-┃ 💬 𓆩𝐆𝐑𝐎𝐔𝐏𓆪: 《${groupPrefix}》
-┃ ⏰ 𓆩𝐓𝐈𝐌𝐄𓆪: 《𓆩${time}𓆪》
-┃ 📅 𓆩𝐃𝐀𝐓𝐄𓆪:𓆩${date}𓆪
-┃ 👑 𓆩𝐎𝐖𝐍𝐄𝐑𓆪: 《𓆩${owner}𓆪》
-┃ ⚡ 𓆩𝐒𝐓𝐀𝐓𝐔𝐒𓆪: 《𓆩𝐎𝐍𝐋𝐈𝐍𝐄𓆪》
-╰━━━〔《𓆩𝐒𝐈𝐙𝐔𝐊𝐀𓆪》〕━━━╯`,
+`╭━━━〔《𓆩𝐏𝐑𝐄𝐅𝐈𝐗 𝐏𝐀𝐍𝐄𝐋𓆪》〕━━━╮
+┃ 🏷️ 𓆩𝐆𝐑𝐎𝐔𝐏𓆪: ${groupName}
+┃ 🔰 𓆩𝐒𝐘𝐒𝐓𝐄𝐌𓆪: ${systemPrefix}
+┃ 💬 𓆩𝐆𝐑𝐎𝐔𝐏𓆪: ${groupPrefix}
+┃ ⏰ 𓆩𝐓𝐈𝐌𝐄𓆪: ${time}
+┃ 📅 𓆩𝐃𝐀𝐓𝐄𓆪: ${date}
+┃ 👑 𓆩𝐎𝐖𝐍𝐄𝐑𓆪: ${owner}
+┃ ⚡ 𓆩𝐒𝐓𝐀𝐓𝐔𝐒𓆪: ONLINE
+╰━━━〔《𓆩𝐍𝐈𝐉𝐇𝐔𝐌𓆪》〕━━━╯`,
 			attachment: await getStreamFromURL(gif)
 		});
 	}

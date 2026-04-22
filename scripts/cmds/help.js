@@ -7,7 +7,7 @@ let xfont = null;
 let yfont = null;
 let categoryEmoji = null;
 
-const HELP_GIF = "https://files.catbox.moe/6touzq.mp4";
+const HELP_GIF = "https://i.imgur.com/pfoGekT.mp4";
 
 // 🔒 AUTHOR LOCK SYSTEM
 const AUTHOR_NAME = "FARHAN-KHAN";
@@ -120,7 +120,7 @@ module.exports = {
     }
 
     if (!input) {
-      let msg = `╭───────❁\n│✨ 𝗙 𝗔 𝗥 𝗛 𝗔 𝗡 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧 ✨\n╰────────────❁\n`;
+      let msg = `╭───────❁\n│✨ ‿𝐃-𝐒 𝐒 𝐈 𝐘 𝐀 𝐌 𝗛𝗘𝗟𝗣 𝗟𝗜𝗦𝗧 ✨\n╰────────────❁\n`;
 
       for (const cat of Object.keys(categories).sort()) {
         msg += `╭─────✰『 ${getCategoryEmoji(cat)} ${fontConvert(cat, "category")} 』\n`;
@@ -131,8 +131,8 @@ module.exports = {
 
       const total = Object.values(categories).reduce((a, b) => a + b.length, 0);
 
-      msg += `╭─────✰[🌟 𝐄𝐍𝐉𝐎𝐘 🌟]\n│> TOTAL COMMANDS: [${total}]\n│\n│> TYPE: [ ${prefix}HELP <COMMAND> ]\n│\n│> FB.LINK: [https://www.facebook.com/MR.FARHAN.420]\n╰────────────✰\n`;
-      msg += `╭─────✰\n│ 💖 𝗦𝗜𝗭𝗨𝗞𝗔-𝗕𝗢𝗧 💖\n╰────────────✰`;
+      msg += `╭─────✰[🌟 𝐄𝐍𝐉𝐎𝐘 🌟]\n│> TOTAL COMMANDS: [${total}]\n│\n│> TYPE: [ ${prefix}HELP <COMMAND> ]\n│\n│> FB.LINK: [https://www.facebook.com/share/1LDy7c49aK/]\n╰────────────✰\n`;
+      msg += `╭─────✰\n│ 💖 ‿𝐍𝐈𝐉𝐇𝐔𝐌-𝗕𝗢𝗧 💖\n╰────────────✰`;
 
       return message.reply({
         body: msg,

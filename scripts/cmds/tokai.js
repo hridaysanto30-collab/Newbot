@@ -19,7 +19,7 @@ module.exports = {
     name: "tokai",
     aliases: ["tukai"],
     version: "1.7",
-    author: "MahMUD",
+    author: "siyam",
     role: 0,
     category: "fun",
     cooldown: 10,
@@ -68,7 +68,7 @@ module.exports = {
       );
 
     } catch (err) {
-      api.sendMessage(`🥹error, contact MahMUD.`, threadID, messageID);
+      api.sendMessage(`🥹error, contact siyam.`, threadID, messageID);
     }
   }
 };

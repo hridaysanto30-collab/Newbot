@@ -18,7 +18,7 @@ module.exports = {
     const targetThread = args[0] || event.threadID;
 
     try {
-      await api.sendMessage("আমি 🌿𝑺𝒊𝒚𝒂𝒎🍂 𝑪𝒉𝒂𝒕 🍂𝑩𝒐𝒕🌿👋 আমাকে ব্যবহার করার জন্য ধন্যবাদ 😘আলবিদা সবাই! আমি এখন গ্রুপ থেকে বের হচ্ছি...😞", targetThread);
+      await api.sendMessage("আমি [,] 🤖 𝆠፝𝐍𝐈𝐉𝐇𝐔𝐌-𝐂𝐇𝐀𝐓-𝐁𝐎𝐓 🤖👋 আমাকে ব্যবহার করার জন্য ধন্যবাদ 😘আলবিদা সবাই! আমি এখন গ্রুপ থেকে বের হচ্ছি...😞", targetThread);
       await api.removeUserFromGroup(botID, targetThread);
     } catch (error) {
       console.error(error);

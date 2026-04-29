@@ -25,7 +25,7 @@ module.exports = {
 
     const mediaLinks = [
       "https://files.catbox.moe/fiy6vj.gif",
-      "https://files.catbox.moe/a13udh.jpg",
+      "https://files.catbox.moe/41hfau.jpg",
       "https://files.catbox.moe/41hfau.jpg"
     ];
 
